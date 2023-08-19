@@ -49,6 +49,7 @@ cat /etc/nftables.d/addons/dns.nft
     }
     ```
 
+
 2. The script is executed
 
     `python3 /usr/lib/nftables/dns.py`
@@ -85,6 +86,7 @@ cat /etc/nftables.d/addons/dns.nft
     * The new config is written to `/etc/nftables.d/addons/dns.nft`
     * The actual config is validated: `sudo nft -cf /etc/nftables.conf`
     * NFTables is reloaded: `sudo systemctl reload nftables.service`
+
 
 3. You will have to include the addon-config in your main-config file `/etc/nftables.conf`:
 
