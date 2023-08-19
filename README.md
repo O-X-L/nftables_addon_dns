@@ -92,11 +92,11 @@ cat /etc/nftables.d/addons/dns.nft
 If the script should be run as non-root user - you will need to add a sudoers.d file to add the needed privileges:
 
 ```text
-Cmnd_Alias NFTABLES_ADDON_DNS = \
+Cmnd_Alias NFTABLES_ADDON = \
   /usr/bin/systemctl reload nftables.service,
   /usr/sbin/nft -cf *
 
-service_user ALL=(ALL) NOPASSWD: NFTABLES_ADDON_DNS
+service_user ALL=(ALL) NOPASSWD: NFTABLES_ADDON
 ```
 
 You may not change the owner of the addon-files as the script will not be able to overwrite them.
