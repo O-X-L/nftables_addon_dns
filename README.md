@@ -8,7 +8,16 @@ NFTables CAN resolve DNS-records - but will throw an error if the record resolve
 
 ----
 
-### Result
+## Other Addons
+
+* [IPLists](https://github.com/superstes/nftables_addon_iplist)
+* [Failover](https://github.com/superstes/nftables_addon_failover)
+
+NFTables documentation: [wiki.superstes.eu](https://wiki.superstes.eu/en/latest/1/network/nftables.html)
+
+----
+
+## Result
 
 ```text
 cat /etc/nftables.d/addons/dns.nft
