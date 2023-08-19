@@ -14,6 +14,8 @@ CONFIG = '/etc/nftables.conf'
 BASE_DIR = '/etc/nftables.d'
 ADDON_DIR = '/etc/nftables.d/addons'
 CONFIG_EXT = 'nft'
+APPENDIX_4 = '_v4'
+APPENDIX_6 = '_v6'
 
 if not CONFIG_EXT.startswith('.'):
     CONFIG_EXT = f'.{CONFIG_EXT}'
@@ -26,9 +28,11 @@ FILE_TMP_PREFIX = '/tmp/nftables_'
 FILE_HEADER = '# Auto-Generated config - DO NOT EDIT MANUALLY!\n\n'
 
 
-def format_var(name: str, data: list, version: int, append: str = None) -> str:
+def format_var(name: str, data: list, version: int) -> str:
     if version not in FALLBACK_VAR_VALUE:
         version = 4
+
+    append = APPENDIX_4 if version == 4 else APPENDIX_6
 
     if append not in [None, ' ', '']:
         name = f'{name}_{append}'
