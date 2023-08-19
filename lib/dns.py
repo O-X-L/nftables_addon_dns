@@ -6,7 +6,7 @@ from util import validate_and_write, load_config, format_var
 PROCESS_IPv6 = True
 
 # paths are set in util (shared between addons)
-APPENDIX_4 = ''
+APPENDIX_4 = '_v4'
 APPENDIX_6 = '_v6'
 CONFIG_FILE = 'dns.json'
 CONFIG_FILE_KEY = 'dns'
