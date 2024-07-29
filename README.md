@@ -123,11 +123,21 @@ If you want to be even safer - you can add a config-validation inside the `nftab
 ```text
 # /etc/systemd/system/nftables.service.d/override.conf
 [Service]
+# catch errors at start
 ExecStartPre=/usr/sbin/nft -cf /etc/nftables.conf
 
+# catch errors at reload
 ExecReload=
 ExecReload=/usr/sbin/nft -cf /etc/nftables.conf
 ExecReload=/usr/sbin/nft -f /etc/nftables.conf
+
+# catch errors at restart
+ExecStop=
+ExecStop=/usr/sbin/nft -cf /etc/nftables.conf
+ExecStop=/usr/sbin/nft flush ruleset
+
+Restart=on-failure
+RestartSec=5s
 ```
 
 This will catch and log config-errors before doing a reload/restart.
