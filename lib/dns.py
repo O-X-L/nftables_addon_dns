@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Source: https://github.com/O-X-L/nftables_addon_dns
+# Copyright (C) 2024 Rath Pascal
+# License: MIT
+
 from dns_resolver import resolve_ipv4, resolve_ipv6
 from util import validate_and_write, load_config, format_var
 

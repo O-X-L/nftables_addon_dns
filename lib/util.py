@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Source: https://github.com/O-X-L/nftables_addon_dns
+# Copyright (C) 2024 Rath Pascal
+# License: MIT
+
 from os import listdir
 from time import time
 from pathlib import Path
