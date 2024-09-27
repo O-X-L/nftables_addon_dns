@@ -1,22 +1,10 @@
 #!/usr/bin/env python3
 
-# Source: https://github.com/superstes/python3-resolver
-# Copyright (C) 2023  René Pascal Rath
+# Source: https://github.com/O-X-L/nftables_addon_dns
+# Copyright (C) 2024  Pascal Rath
 # License: GNU General Public License v3.0
 
-from socket import getaddrinfo, gaierror
-from ipaddress import IPv4Address, AddressValueError
-
-DUMMY_PORT = 80
-
-
-def _is_ipv4_address(i: str) -> bool:
-    try:
-        IPv4Address(i)
-        return True
-
-    except AddressValueError:
-        return False
+from socket import getaddrinfo, gaierror, AF_INET, AF_INET6
 
 
 def _sorted(data: list) -> list:
@@ -24,9 +12,9 @@ def _sorted(data: list) -> list:
     return data
 
 
-def resolve(name: str) -> list:
+def resolve(name: str, ip4: bool) -> list:
     try:
-        raw = getaddrinfo(name, DUMMY_PORT)
+        raw = getaddrinfo(name, None, AF_INET if ip4 else AF_INET6)
         # pylint: disable=R1718
         return _sorted(list(set([r[4][0] for r in raw])))
 
@@ -35,8 +23,8 @@ def resolve(name: str) -> list:
 
 
 def resolve_ipv4(name: str) -> list:
-    return _sorted([i for i in resolve(name) if _is_ipv4_address(i)])
+    return resolve(name, True)
 
 
 def resolve_ipv6(name: str) -> list:
-    return _sorted([i for i in resolve(name) if not _is_ipv4_address(i)])
+    return resolve(name, False)
