@@ -92,7 +92,7 @@ cat /etc/nftables.d/addons/dns.nft
 
     ```
     ...
-    include /etc/nftables.d/addons/*.nft
+    include "/etc/nftables.d/addons/*.nft"
     ...
     ```
 
