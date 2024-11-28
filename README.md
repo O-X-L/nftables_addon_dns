@@ -10,10 +10,10 @@ NFTables CAN resolve DNS-records - but will throw an error if the record resolve
 
 ## Other Addons
 
-* [IPLists](https://github.com/superstes/nftables_addon_iplist)
-* [Failover](https://github.com/superstes/nftables_addon_failover)
+* [IPLists](https://github.com/O-X-L/nftables_addon_iplist)
+* [Failover](https://github.com/O-X-L/nftables_addon_failover)
 
-NFTables documentation: [wiki.superstes.eu](https://wiki.superstes.eu/en/latest/1/network/firewall_nftables.html)
+NFTables documentation: [docs.o-x-l.com](https://docs.o-x-l.com/firewall/nftables.html)
 
 ----
 
