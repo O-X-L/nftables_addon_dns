@@ -10,14 +10,11 @@ from util import validate_and_write, load_config, format_var
 PROCESS_IPv6 = True
 
 # paths are set in util (shared between addons)
-CONFIG_FILE = 'dns.json'
-CONFIG_FILE_KEY = 'dns'
-OUT_FILE = 'dns.nft'
-
-CONFIG = load_config(file=CONFIG_FILE, key=CONFIG_FILE_KEY)
+KEY = 'dns'
+CONFIG = load_config(KEY)
 
 if CONFIG is None or len(CONFIG) == 0:
-    raise SystemExit(f"Config file could not be loaded: '{CONFIG_FILE}'!")
+    raise SystemExit('DNS Config-file could not be loaded!')
 
 lines = []
 for var, hostnames in CONFIG.items():
@@ -50,4 +47,4 @@ for var, hostnames in CONFIG.items():
             )
         )
 
-validate_and_write(lines=lines, file=OUT_FILE, key=CONFIG_FILE_KEY)
+validate_and_write(lines=lines, key=KEY)
