@@ -78,6 +78,8 @@ cat /etc/nftables.d/addons/dns.nft
     }
     ```
 
+    **Note**: If your variable ends in `_1` it will only contain **ONE** IP address! This can be useful if you need a DNAT target.
+
 
 2. The script is executed
 

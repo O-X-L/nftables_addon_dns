@@ -13,15 +13,17 @@ from subprocess import PIPE as subprocess_pipe
 from json import loads as json_loads
 from json import JSONDecodeError
 
-IS_ROOT = getuid() == 0
-SUDO = '' if IS_ROOT else 'sudo '
-CMD_RELOAD = f'{SUDO}systemctl reload nftables.service'  # has to be changed if no systemd is available
 CONFIG = '/etc/nftables.conf'
 BASE_DIR = '/etc/nftables.d'
 ADDON_DIR = '/etc/nftables.d/addons'
 CONFIG_EXT = 'nft'
 APPENDIX_4 = 'v4'
 APPENDIX_6 = 'v6'
+
+IS_ROOT = getuid() == 0
+SUDO = '' if IS_ROOT else 'sudo '
+CMD_RELOAD = f'{SUDO}systemctl reload nftables.service'  # has to be changed if no systemd is available
+VAR_SINGLE_END = '_1'
 
 if not CONFIG_EXT.startswith('.'):
     CONFIG_EXT = f'.{CONFIG_EXT}'
@@ -41,7 +43,7 @@ def ensure_list(data: (str, list)) -> list:
     return [data]
 
 
-def format_var(name: str, data: list, version: int, as_set: bool = True, fallback: str = None) -> str:
+def format_var(name: str, data: list, version: int, fallback: str = None) -> str:
     if version not in FALLBACK_VAR_VALUE:
         version = 4
 
@@ -50,7 +52,10 @@ def format_var(name: str, data: list, version: int, as_set: bool = True, fallbac
     if append not in [None, ' ', '']:
         name = f'{name}_{append}'
 
-    if as_set or len(data) > 1:
+    if name.endswith(VAR_SINGLE_END) and len(data) > 0:
+        data = data[0]
+
+    if len(data) > 1:
         raw = f"define { name } = {{ %s }}"
 
     else:
