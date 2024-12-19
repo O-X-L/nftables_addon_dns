@@ -47,13 +47,13 @@ def format_var(name: str, data: list, version: int, fallback: str = None) -> str
     if version not in FALLBACK_VAR_VALUE:
         version = 4
 
+    if name.endswith(VAR_SINGLE_END) and len(data) > 0:
+        data = [data[0]]
+
     append = APPENDIX_4 if version == 4 else APPENDIX_6
 
     if append not in [None, ' ', '']:
         name = f'{name}_{append}'
-
-    if name.endswith(VAR_SINGLE_END) and len(data) > 0:
-        data = data[0]
 
     if len(data) > 1:
         raw = f"define { name } = {{ %s }}"
