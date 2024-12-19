@@ -4,7 +4,7 @@
 # Copyright (C) 2024 Rath Pascal
 # License: MIT
 
-from os import listdir
+from os import listdir, getuid
 from time import time
 from pathlib import Path
 from hashlib import md5 as md5_hash
@@ -13,7 +13,9 @@ from subprocess import PIPE as subprocess_pipe
 from json import loads as json_loads
 from json import JSONDecodeError
 
-CMD_RELOAD =  'sudo systemctl reload nftables.service'  # has to be changed if no systemd is available
+IS_ROOT = getuid() == 0
+SUDO = '' if IS_ROOT else 'sudo '
+CMD_RELOAD = f'{SUDO}systemctl reload nftables.service'  # has to be changed if no systemd is available
 CONFIG = '/etc/nftables.conf'
 BASE_DIR = '/etc/nftables.d'
 ADDON_DIR = '/etc/nftables.d/addons'
@@ -49,9 +51,8 @@ def format_var(name: str, data: list, version: int) -> str:
     return raw % ', '.join(map(str, data))
 
 
-def load_config(file: str, key: str = None) -> (dict, list, None):
-    file = f'{ADDON_DIR}/{file}'
-    with open(file, 'r', encoding='utf-8') as _cnf:
+def load_config(key: str) -> (dict, list, None):
+    with open(f'{ADDON_DIR}/{key}.json', 'r', encoding='utf-8') as _cnf:
         try:
             if key is None:
                 return json_loads(_cnf.read())
@@ -77,7 +78,8 @@ def _reload() -> bool:
 
 
 def _validate(file: str) -> bool:
-    return _exec(['sudo', '/usr/sbin/nft', '-cf', file]) == 0
+    cmd = f'{SUDO}/usr/sbin/nft -cf {file}'
+    return _exec(cmd.split(' ')) == 0
 
 
 def _write(file: str, content: str):
@@ -96,8 +98,8 @@ def _file_hash(file: str) -> str:
         return md5_hash(b'').hexdigest()
 
 
-def validate_and_write(key: str, lines: list, file: str):
-    file_out = f'{file}{CONFIG_EXT}'
+def validate_and_write(key: str, lines: list):
+    file_out = f'{key}{CONFIG_EXT}'
     file_out_path = f'{ADDON_DIR}/{file_out}'
     file_tmp = f'{FILE_TMP_PREFIX}{key}_{time()}{CONFIG_EXT}'
     file_tmp_main = f'{FILE_TMP_PREFIX}main_{time()}{CONFIG_EXT}'
