@@ -34,7 +34,14 @@ FILE_TMP_PREFIX = '/tmp/nftables_'
 FILE_HEADER = '# Auto-Generated config - DO NOT EDIT MANUALLY!\n\n'
 
 
-def format_var(name: str, data: list, version: int) -> str:
+def ensure_list(data: (str, list)) -> list:
+    if isinstance(data, list):
+        return data
+
+    return [data]
+
+
+def format_var(name: str, data: list, version: int, as_set: bool = True, fallback: str = None) -> str:
     if version not in FALLBACK_VAR_VALUE:
         version = 4
 
@@ -43,10 +50,17 @@ def format_var(name: str, data: list, version: int) -> str:
     if append not in [None, ' ', '']:
         name = f'{name}_{append}'
 
-    raw = f"define { name } = {{ %s }}"
+    if as_set or len(data) > 1:
+        raw = f"define { name } = {{ %s }}"
+
+    else:
+        raw = f"define { name } = %s"
 
     if len(data) == 0:
-        return raw % FALLBACK_VAR_VALUE[version]
+        if fallback is None:
+            return raw % FALLBACK_VAR_VALUE[version]
+
+        return raw % fallback
 
     return raw % ', '.join(map(str, data))
 
