@@ -50,6 +50,7 @@ def format_var(name: str, data: list, version: int) -> str:
 
 
 def load_config(file: str, key: str = None) -> (dict, list, None):
+    file = f'{ADDON_DIR}/{file}'
     with open(file, 'r', encoding='utf-8') as _cnf:
         try:
             if key is None:
