@@ -20,8 +20,8 @@ CONFIG = '/etc/nftables.conf'
 BASE_DIR = '/etc/nftables.d'
 ADDON_DIR = '/etc/nftables.d/addons'
 CONFIG_EXT = 'nft'
-APPENDIX_4 = '_v4'
-APPENDIX_6 = '_v6'
+APPENDIX_4 = 'v4'
+APPENDIX_6 = 'v6'
 
 if not CONFIG_EXT.startswith('.'):
     CONFIG_EXT = f'.{CONFIG_EXT}'
