@@ -28,7 +28,8 @@ NFTables documentation: [docs.o-x-l.com](https://docs.o-x-l.com/firewall/nftable
 * Add the script-files:
 
    * [util.py](https://github.com/O-X-L/nftables_addon_dns/blob/latest/lib/util.py)
-   * [iplist.py](https://github.com/O-X-L/nftables_addon_dns/blob/latest/lib/dns.py)
+   * [dns.py](https://github.com/O-X-L/nftables_addon_dns/blob/latest/lib/dns.py)
+   * [dns_resolver.py](https://github.com/O-X-L/nftables_addon_dns/blob/latest/lib/dns_resolver.py)
 
 * Add the config file:
 
