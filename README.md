@@ -15,8 +15,6 @@ Links: [NFTables Documentation](https://docs.o-x-l.com/firewall/nftables.html) |
 * [IPLists](https://github.com/O-X-L/nftables_addon_iplist)
 * [Failover](https://github.com/O-X-L/nftables_addon_failover)
 
-NFTables documentation: [docs.o-x-l.com](https://docs.o-x-l.com/firewall/nftables.html)
-
 ----
 
 ## Install
