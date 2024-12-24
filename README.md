@@ -6,14 +6,10 @@ Having variables that hold the IPs of some DNS-record is one of those.
 
 NFTables CAN resolve DNS-records - but will throw an error if the record resolves to more than one IP.. (`Error: Hostname resolves to multiple addresses`)
 
-Links: [NFTables Documentation](https://docs.o-x-l.com/firewall/nftables.html) | [Video in German](https://www.youtube.com/watch?v=bTsElH5FjS8)
-
-----
-
-## Other Addons
-
-* [IPLists](https://github.com/O-X-L/nftables_addon_iplist)
-* [Failover](https://github.com/O-X-L/nftables_addon_failover)
+Links: [NFTables Documentation](https://docs.o-x-l.com/firewall/nftables.html) |
+[Video in German](https://www.youtube.com/watch?v=bTsElH5FjS8) |
+[Addon for IP-Lists](https://github.com/O-X-L/nftables_addon_iplist) |
+[Addon for Connection-Failover](https://github.com/O-X-L/nftables_addon_failover)
 
 ----
 
